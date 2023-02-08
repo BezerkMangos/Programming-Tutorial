@@ -11,6 +11,8 @@ public class CharacterStats : MonoBehaviour
     public int damage;
     public int armor;
 
+    public event System.Action<int, int> OnHealthChange;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -22,11 +24,17 @@ public class CharacterStats : MonoBehaviour
         damage -= armor;
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
+        if (OnHealthChange != null )
+        {
+            OnHealthChange(maxHealth, currentHealth);
+        }
+
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             Die();
         }
+
     }
 
     public virtual void Die()
