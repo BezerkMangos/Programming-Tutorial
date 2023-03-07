@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-    public int score = 1;
+    public string nameCollectable;
+    public int score;
+    public int restoreHp;
 
-    private void OnCollisionEnter(Collision collision)
+    public Collectable(string name, int scoreVal, int restoreHpVal)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            ScoreManager.scoreManager.updateScore(score);
-            Destroy(gameObject);
-
-            
-        }
-
+        this.name = name;
+        this.score = scoreVal;
+        this.restoreHp = restoreHpVal;
     }
+
+    public void UpdateScore()
+    {
+        ScoreManager.scoreManager.updateScore(score);
+    }
+
+    public void UpdateHealth()
+    {
+        
+    }
+
+
+
+
+
+
 
 }
